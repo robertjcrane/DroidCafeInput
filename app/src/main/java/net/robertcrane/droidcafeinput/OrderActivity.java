@@ -1,6 +1,7 @@
 package net.robertcrane.droidcafeinput;
 
 import android.content.Intent;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -79,6 +80,24 @@ public class OrderActivity extends AppCompatActivity implements AdapterView.OnIt
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
+        // nothing to do here.... yet
     }
+
+    public void showDatePicker(View view) {
+        DialogFragment dateFragment = new DatePickerFragment();
+        dateFragment.show(getSupportFragmentManager(), "datePicker");
+    }//end showDatePicker
+
+
+    public void processDatePickerResult(int y, int m, int d) {
+        String m_string = Integer.toString(m + 1);
+        String d_string = Integer.toString(d);
+        String y_string = Integer.toString(y);
+        String dateMessage = (d_string + "-" + m_string + "-" + y_string);
+        Toast.makeText(this, getString(R.string.date)+dateMessage,Toast.LENGTH_SHORT).show();
+        TextView dateTView = findViewById(R.id.dateTextView);
+        dateTView.setText(getString(R.string.date_preamble)+dateMessage);
+    }
+
+
 }
